@@ -16,7 +16,7 @@ const ThingApiService = {
   getThing(thingId) {
     return fetch(`${config.API_ENDPOINT}/things/${thingId}`, {
       headers: {
-        'authorization': `basic ${TokenService.getAuthToken()}`,
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
     })
       .then(res =>
@@ -25,10 +25,10 @@ const ThingApiService = {
           : res.json()
       )
   },
-  getThingReviews(thingId) {
-    return fetch(`${config.API_ENDPOINT}/things/${thingId}/reviews`, {
+  getThingThings(thingId) {
+    return fetch(`${config.API_ENDPOINT}/things/${thingId}/things`, {
       headers: {
-        'authorization': `basic ${TokenService.getAuthToken()}`,
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
     })
       .then(res =>
@@ -37,12 +37,12 @@ const ThingApiService = {
           : res.json()
       )
   },
-  postReview(thingId, text) {
-    return fetch(`${config.API_ENDPOINT}/reviews`, {
+  postThing(thingId, text) {
+    return fetch(`${config.API_ENDPOINT}/things`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'authorization': `basic ${TokenService.getAuthToken()}`,
+        'authorization': `bearer ${TokenService.getAuthToken()}`,
       },
       body: JSON.stringify({
         thing_id: thingId,
